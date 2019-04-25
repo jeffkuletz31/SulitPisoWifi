@@ -3,6 +3,7 @@
                 $ip = $_POST['ip'];
                 $mac = $_POST['mac'];
                 exec("sudo iptables -I internet 1 -t mangle -m mac --mac-source $mac -j RETURN");
+                //exec("iptables -t nat -A POSTROUTING -s " . $ip . " -j MASQUERADE");
                 exec("sudo rmtrack " . $ip);
                 sleep(1);
                 // allowing rmtrack to be executed

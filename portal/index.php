@@ -10,13 +10,11 @@
                 // from it's IP address in linux environment.
                 $arp = "/usr/sbin/arp"; // execute the arp command to get their mac address
                 $mac = shell_exec("sudo $arp -n " . $ip);
-                preg_match('/..:..:..:..:..:../',$mac , $matches);
+                preg_match('/..:..:..:..:..:../', $mac , $matches);
                 $mac = $matches[0];
                 // if MAC Address couldn't be identified.
-                echo $mac;
                 if( $mac === NULL) {
-                        echo "Access Denied.";
-                        exit;
+                        echo "Cant resolved mac...";
                 }
         ?>
 
