@@ -7,7 +7,7 @@ fi
 
 echo "┌─────────────────────────────────────────"
 echo "|This script might take a some time"
-echo "|This will automatically reboot your system
+echo "|This will automatically reboot your system"
 echo "└─────────────────────────────────────────"
 read -p "Press enter to to continue"
 
