@@ -32,8 +32,8 @@ echo "┌───────────────────────�
 echo "|Downloading portal"
 echo "└─────────────────────────────────────────"
 wget -q  https://raw.githubusercontent.com/rhalf/SulitPisoWifi/master/portal/index.php -O /var/www/html/index.php
-wget -q  https://raw.githubusercontent.com/rhalf/SulitPisoWifi/master/portal/index.php -O /var/www/html/process.php
-wget -q  https://raw.githubusercontent.com/rhalf/SulitPisoWifi/master/portal/index.php -O /var/www/html/kick.php
+wget -q  https://raw.githubusercontent.com/rhalf/SulitPisoWifi/master/portal/process.php -O /var/www/html/process.php
+wget -q  https://raw.githubusercontent.com/rhalf/SulitPisoWifi/master/portal/kick.php -O /var/www/html/kick.php
 
 echo "┌─────────────────────────────────────────"
 echo "|Updating Visudo"
@@ -85,18 +85,20 @@ iptables -X -t nat
 iptables -F -t mangle
 iptables -X -t mangle
 
-echo "┌─────────────────────────────────────────"
-echo "|Configuring ip-forwarding"
-echo "└─────────────────────────────────────────"
-echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf 
-sh -c "iptables-save > /etc/iptables.ipv4.nat"
-sed -i -e '$i iptables-restore < /etc/iptables.ipv4.nat\n' /etc/rc.local
+
 
 iptables -t nat -A PREROUTING -s 192.168.24.0/24 -p tcp --dport 80 -j DNAT --to-destination 192.168.24.1:80
 iptables -t nat -A POSTROUTING -j MASQUERADE
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
 apt-get -y install iptables-persistent
+
+echo "┌─────────────────────────────────────────"
+echo "|Configuring ip-forwarding"
+echo "└─────────────────────────────────────────"
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf 
+sh -c "iptables-save > /etc/iptables.ipv4.nat"
+sed -i -e '$i iptables-restore < /etc/iptables.ipv4.nat\n' /etc/rc.local
 
 echo "┌─────────────────────────────────────────"
 echo "|configuring hostapd to start at boot"
@@ -116,3 +118,8 @@ echo "└───────────────────────�
 apt-get install php7.0-fpm -yqq
 
 
+echo "┌─────────────────────────────────────────"
+echo "|Rebooting in 5 seconds..."
+echo "└─────────────────────────────────────────"
+sleep 3
+reboot

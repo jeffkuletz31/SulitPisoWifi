@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>PHP Test</title>
+        <title>SulitPisoWifi</title>
     </head>
     <body>
         <?php
@@ -18,14 +18,25 @@
                 }
         ?>
 
-        <form method="post" action="process.php">
+        <form >
                 <input type="text" name="mac" value="<?php echo $mac; ?>" />
                 <input type="text" name="ip" value="<?php echo $ip; ?>" />
-                <input type="submit" value="OK" style="padding:10px 20px;" />
         </form>
+
+        <form method="post" action="process.php">
+                <input type="hidden" name="mac" value="<?php echo $mac; ?>" />
+                <input type="hidden" name="ip" value="<?php echo $ip; ?>" />
+                <input type="submit" value="Subscribe" style="padding:10px 20px;" />
+        </form>
+
+
+        <form method="post" action="kick.php">
+                <input type="hidden" name="mac" value="<?php echo $mac; ?>" />
+                <input type="hidden" name="ip" value="<?php echo $ip; ?>" />
+                <input type="submit" value="Unsubscribe" style="padding:10px 20px;" />
+        </form>
+
 
     </body>
 </html>
-
-
 
