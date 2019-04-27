@@ -3,12 +3,13 @@
                 $ip = $_POST['ip'];
                 $mac = $_POST['mac'];
 
+                exec("sudo iptables -t nat -I PREROUTING -p tcp -s " . $ip ." -j RETURN");
                 exec("sudo iptables -t nat -A POSTROUTING -s " . $ip . " -j MASQUERADE");
 
                 // OK, redirection bypassed.
                 // Show the logged in message or directly redirect to other website
-                echo "User logged in.";
+                echo "authentication successful...";
         } else {
-                echo "Access Denied";
+                echo "authentication failed...";
         }
 ?>

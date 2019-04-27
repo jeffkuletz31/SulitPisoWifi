@@ -14,9 +14,10 @@
                 exit;
         }
 
+        exec("sudo iptables -t nat -D PREROUTING -p tcp -s " . $ip ." -j RETURN");
         exec("sudo iptables -t nat -D POSTROUTING -s " . $ip . " -j MASQUERADE");
         // remove their connection track if any
-        echo "kickin' successful.";
+        echo "authentication removed...";
 ?>
 
 
