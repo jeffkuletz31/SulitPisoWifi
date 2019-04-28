@@ -67,8 +67,9 @@ iptables -X -t mangle
 echo "┌─────────────────────────────────────────"
 echo "|Configuring iptables"
 echo "└─────────────────────────────────────────"
-iptables -t nat -A PREROUTING -s 192.168.100.0/24 -p udp  -j DNAT --to-destination 192.168.100.1:80
-iptables -t nat -A PREROUTING -s 192.168.100.0/24 -p tcp  -j DNAT --to-destination 192.168.100.1:80
+iptables -t nat -A PREROUTING -s 192.168.100.0/24 -p tcp -m multiport --dports 80,443 -j DNAT --to-destination 192.168.100.1:80
+iptables -t nat -A PREROUTING -s 192.168.100.0/24 -p tcp -j DNAT --to-destination 192.168.100.1
+iptables -t nat -A PREROUTING -s 192.168.100.0/24 -p udp -j DNAT --to-destination 192.168.100.1
 #iptables -t nat -I PREROUTING -p tcp -s 192.168.100.120 -j RETURN
 #iptables -t nat -A POSTROUTING -s 192.168.100.120 -j MASQUERADE
 

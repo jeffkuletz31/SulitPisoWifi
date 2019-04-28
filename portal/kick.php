@@ -1,26 +1,41 @@
 <?php
         // get the user IP address from the query string
-        $ip = $_POST['ip'];
-        // this is the path to the arp command used to get user MAC address
-        // from it's IP address in linux environment.
-        $arp = "/usr/sbin/arp";
-        // execute the arp command to get their mac address
-        $mac = shell_exec("sudo $arp -n " . $ip);
-        preg_match('/..:..:..:..:..:../',$mac , $matches);
-        $mac = @$matches[0];
-        // if MAC Address couldn't be identified.
-        if( $mac === NULL) {
-                echo "Error: Can't retrieve user's MAC address.";
-                exit;
+        if (isset($_POST['ip']) && isset($_POST['mac'])) {
+                $ip = $_POST['ip'];
+                $mac = $_POST['mac'];
+
+                $command = "sudo iptables -t nat -C PREROUTING -p tcp -s " . $ip ." -j RETURN";
+                while(1) {
+                        exec($command, $output, $return);
+                        if (!$return) echo var_dump($output);
+                        else break;
+                        exec("sudo iptables -t nat -D PREROUTING -p tcp -s " . $ip ." -j RETURN");
+                }
+
+
+                $command = "sudo iptables -t nat -C PREROUTING -p udp -s " . $ip ." -j RETURN";
+                while(1) {
+                        exec($command, $output, $return);
+                        if (!$return) echo var_dump($output);
+                        else break;
+                        exec("sudo iptables -t nat -D PREROUTING -p udp -s " . $ip ." -j RETURN");
+                }
+
+
+                $command = "sudo iptables -t nat -C POSTROUTING -s " . $ip . " -j MASQUERADE";
+                while (1) {
+                        exec($command, $output, $return);
+                        if (!$return) echo var_dump($output);
+                        else break;
+                        exec("sudo iptables -t nat -D POSTROUTING -s " . $ip . " -j MASQUERADE");
+                }
+
+                echo "authentication removing successful...";
+
+        } else {
+                echo "authentication removing failed...";
         }
-
-        exec("sudo iptables -t nat -D PREROUTING -p tcp -s " . $ip ." -j RETURN");
-        exec("sudo iptables -t nat -D POSTROUTING -s " . $ip . " -j MASQUERADE");
-        // remove their connection track if any
-        echo "authentication removed...";
+        header("refresh:3;url=http://sulitpisowifi.net/index.php/");
 ?>
-
-
-
 
 
