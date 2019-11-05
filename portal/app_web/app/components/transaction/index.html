@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+        <div class="panel-heading">Transaction</div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Transaction</th>
+                                <th colspan="3">Access</th>
+                                <th colspan="2">Client</th>
+                                <th colspan="1">Status</th>
+                            </tr>
+                            <tr>
+                                <th>Started</th>
+                                <th>Ended</th>
+                                <th>Code</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                                <th>Ip</th>
+                                <th>Mac</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="transaction in transactions">
+                                <td>{{transaction.dtStarted | datetimeFilter}}</td>    
+                                <td>{{transaction.dtEnded | datetimeFilter}}</td>
+                                <td>{{transaction.access.code}}</td>
+                                <td>{{transaction.access.time | timeFilter}}</td>
+                                <td>{{transaction.access.amount | currencyFilter}}</td>
+                                <td>{{transaction.client.ip}}</td>
+                                <td>{{transaction.client.mac}}</td>
+                                <td>{{transaction.status.name}}</td>
+                            </tr>
+                        </tbody>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

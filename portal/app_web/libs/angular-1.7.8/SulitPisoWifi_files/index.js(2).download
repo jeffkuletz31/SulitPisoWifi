@@ -1,0 +1,35 @@
+var app = angular.module('app');
+
+app.controller('clientController', function (
+    $scope, 
+    variableFactory,
+    Client) {
+
+   
+    $scope.client = {}; 
+   
+
+    $scope.get = function() {
+        
+    
+        // Client.getByIpMac({ip : variableFactory.remote.ip, mac : variableFactory.remote.mac}, 
+        //     function(result) {
+        //         $scope.client = result.data;
+        //         console.log("client exist!");
+        //     },
+        //     function(result) {
+        //         variableFactory.remote.status = $scope.status;
+        //         Client.save(variableFactory.remote, function(result) {
+        //             console.log("client save!");
+        //         });
+        //     }
+        // );
+    };
+
+    $scope.init = function() {
+   
+    };
+    
+
+    $scope.init();
+});

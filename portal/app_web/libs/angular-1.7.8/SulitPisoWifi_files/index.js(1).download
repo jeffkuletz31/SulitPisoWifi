@@ -1,0 +1,41 @@
+var app = angular.module('app');
+
+app.controller('mainController', function (
+    $scope) {
+
+
+
+    $scope.get = function() {
+        // // Server.get({id : 1}, function(result) {
+        // //     $scope.server  = result.data[0];
+        // // });
+        // // Remote.get({id : 1}, function(result) {
+        // //     $scope.remote = result.data[0];
+        // // });
+        // Status.get({id : 1}, function(result) {
+        //     $scope.status = result.data[0];
+        // });
+        // Access.get({id : 1}, function(result) {
+        //     $scope.access = result.data[0];
+        // });
+        // Client.getByIpMac({ip : $scope.remote.ip, mac : $scope.remote.mac}, 
+        //     function(result) {
+        //         $scope.client = result.data;
+        //         console.log("client exist!");
+        //     },
+        //     function(result) {
+        //         $scope.remote.status = $scope.status;
+        //         Client.save($scope.remote, function(result) {
+        //             console.log("client save!");
+        //         });
+        //     }
+        // );
+    };
+
+    $scope.init = function() {
+        
+    };
+    
+
+    $scope.init();
+});

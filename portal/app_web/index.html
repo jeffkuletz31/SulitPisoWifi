@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+        <!-- meta stuffs -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=0.75" />
+
+        <title>SulitPisoWifi</title>
+                
+
+        <!--jQuery library -->
+        <script type="text/javascript" src="libs/jquery-2.2.1/jquery-2.2.1.min.js"></script>
+        <!--Bootstrap 3-->
+        <script src="libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="libs/bootstrap-3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="libs/bootstrap-3.3.7/css/bootstrap-theme.min.css">
+
+         <!--Angularjs-->
+         <script src="libs/angular-1.7.8/angular.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-aria.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-animate.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-sanitize.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-route.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-resource.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-touch.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-cookies.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-loader.min.js"></script>
+         <script src="libs/angular-1.7.8/angular-parse-ext.min.js"></script>
+ 
+         <!--Angularjs Bootstrap 3-->
+
+         <link href="libs/angular-ui/ui-bootstrap-2.5.0-csp.css" rel="stylesheet" />
+         <script src="libs/angular-ui/ui-bootstrap-2.5.0.min.js"></script>
+         <script src="libs/angular-ui/ui-bootstrap-tpls-2.5.0.min.js"></script>
+            
+        <script type="text/javascript" src="index.js"></script>
+
+        <!-- custom libraries -->
+        <script src="app/app/appConfig.js"></script>
+        <script src="app/app/appRun.js"></script>
+        <script src="app/app/appController.js"></script>
+        <script src="app/app/appDirective.js"></script>
+        <script src="app/app/appFilter.js"></script>
+        <script src="app/app/appResource.js"></script>
+        <script src="app/app/appService.js"></script>
+        <script src="app/app/appVariable.js"></script>
+        <script src="app/app/appExtension.js"></script>
+
+        <script src="app/components/main/index.js"></script>
+        <script src="app/components/access/index.js"></script>
+        <script src="app/components/client/index.js"></script>
+        <script src="app/components/server/index.js"></script>
+        <script src="app/components/remote/index.js"></script>
+        <script src="app/components/transaction/index.js"></script>
+        <script src="app/components/session/index.js"></script>
+
+        <script src="app/components/header/index.js"></script>
+        <script src="app/components/footer/index.js"></script>
+
+   
+        <style type="text/css">
+            @media (min-width: 800px) { .container { width: 800px !important; } }
+            
+            .alert {
+                line-height: 10px !important;
+            }
+        </style>
+    </head>
+
+    <body ng-app="app" ng-controller="appController">
+        <div ng-view></div>
+    </body>
+</html>

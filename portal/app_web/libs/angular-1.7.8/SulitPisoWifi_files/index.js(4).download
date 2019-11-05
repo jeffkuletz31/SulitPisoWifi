@@ -1,0 +1,12 @@
+var app = angular.module('app');
+
+app.controller('remoteController', function ($scope, variableFactory) {
+
+    $scope.init = function() {
+        variableFactory.remote.$promise.then(function(data){
+            $scope.remote = variableFactory.remote[0];
+        }); 
+    };
+
+    $scope.init();
+});
