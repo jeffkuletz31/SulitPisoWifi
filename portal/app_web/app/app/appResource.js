@@ -5,19 +5,38 @@ var ip = 'http://192.168.1.16:81';
 
 
 app.factory('Server', function ($resource) {
-    return $resource(ip + '/server/:id', { id: '@id' });
+    return $resource(ip + '/server/:id', { id: '@id' }, {
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        }
+    });
 });
 
 app.factory('Remote', function ($resource) {
-    return $resource(ip + '/remote/:id', { id: '@id' });
+    return $resource(ip + '/remote/:id', { id: '@id' } ,{
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        }
+    });
 });
 
 app.factory('Status', function ($resource) {
-    return $resource(ip + '/status/:id', { id: '@id' });
+    return $resource(ip + '/status/:id', { id: '@id' }, {
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        }
+    });
 });
 
 app.factory('Access', function ($resource) {
     return $resource(ip + '/access/:id', { id: '@id' }, {
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        },
         'update': {
             method: 'PUT'
         },
@@ -32,6 +51,10 @@ app.factory('Access', function ($resource) {
 
 app.factory('Transaction', function ($resource) {
     return $resource(ip + '/transaction/:id', { id: '@id' }, {
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        },
         'update': {
             method: 'PUT'
         },
@@ -46,6 +69,11 @@ app.factory('Transaction', function ($resource) {
 
 app.factory('Client', function ($resource) {
     return $resource(ip + '/client/:id', { id: '@id' },{
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        },
+
         'update': {
             method: 'PUT'
         },
@@ -73,6 +101,10 @@ app.factory('Client', function ($resource) {
 
 app.factory('Session', function ($resource) {
     return $resource(ip + '/session/:id', { id: '@id' },{
+        'getAll' : {
+            method: 'GET',
+            isArray : false
+        },
         'update': {
             method: 'PUT'
         },

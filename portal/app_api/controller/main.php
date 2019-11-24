@@ -15,270 +15,262 @@ Flight::route('GET /', function(){
 
 // server
 Flight::route('GET|POST|PUT|DELETE /server(/@id)', function($id){
+   
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == 'GET') {
-            if ($id) { $result = Server::select($id); }
-            else { $result = Server::selectAll(); }
-        }  elseif ($request->method == Response::POST) {
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Server::select($id); }
+            else { $response->data = Server::selectAll(); }
+        }  elseif (Flight::request()->method == 'POST') {
             throw new Exception("post method not implemented");
-        } elseif ($request->method == Response::PUT) {
+        } elseif (Flight::request()->method == 'PUT') {
             throw new Exception("put method not implemented");
-        } elseif ($request->method == Response::DELETE) {
+        } elseif (Flight::request()->method == 'DELETE') {
             throw new Exception("delete method not implemented");
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);    
-        Flight::error($response);   		
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 // remote
 Flight::route('GET|POST|PUT|DELETE /remote(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == 'GET') {
-            if ($id) { $result = Remote::select($id); }
-            else { $result = Remote::selectAll(); }
-        }  elseif ($request->method == Response::POST) {
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Remote::select($id); }
+            else { $response->data = Remote::selectAll(); }
+        }  elseif (Flight::request()->method == 'POST') {
             throw new Exception("post method not implemented");
-        } elseif ($request->method == Response::PUT) {
+        } elseif (Flight::request()->method == 'PUT') {
             throw new Exception("put method not implemented");
-        } elseif ($request->method == Response::DELETE) {
+        } elseif (Flight::request()->method == 'DELETE') {
             throw new Exception("delete method not implemented");
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 // status
 Flight::route('GET|POST|PUT|DELETE /status(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == 'GET') {
-            if ($id) { $result = Status::select($id); }
-            else { $result = Status::selectAll(); }
-        }  elseif ($request->method == Response::POST) {
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Status::select($id); }
+            else { $response->data = Status::selectAll(); }
+        }  elseif (Flight::request()->method == 'POST') {
             throw new Exception("post method not implemented");
-        } elseif ($request->method == Response::PUT) {
+        } elseif (Flight::request()->method == 'PUT') {
             throw new Exception("put method not implemented");
-        } elseif ($request->method == Response::DELETE) {
+        } elseif (Flight::request()->method == 'DELETE') {
             throw new Exception("delete method not implemented");
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 // access
 Flight::route('GET|POST|PUT|DELETE /access(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+    $code = Flight::request()->query['code'];
+
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        $code = $request->query['code'];
-        if ($request->method == Response::GET) {
-            if ($id) { $result = Access::select($id); }
-            elseif ($code) { $result = Access::selectByCode($code); }
-            else { $result = Access::selectAll(); }
-        } elseif ($request->method == Response::POST) {
-            $result = Access::insert($access);
-        } elseif ($request->method == Response::PUT) {
-            $result = Access::update($id, $access);
-        } elseif ($request->method == Response::DELETE) {
-            $result = Access::delete($id);
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Access::select($id); }
+            elseif ($code) { $response->data = Access::selectByCode($code); }
+            else { $response->data = Access::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
+            $response->data = Access::insert($access);
+        } elseif (Flight::request()->method == 'PUT') {
+            $response->data = Access::update($id, $access);
+        } elseif (Flight::request()->method == 'DELETE') {
+            $response->data = Access::delete($id);
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 
 // access_type
 Flight::route('GET|POST|PUT|DELETE /access_type(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+    
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == Response::GET) {
-            if ($id) { $result = AccessType::select($id); } 
-            else { $result = AccessType::selectAll(); }
-        } elseif ($request->method == Response::POST) {
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = AccessType::select($id); } 
+            else { $response->data = AccessType::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
             throw new Exception("post method not implemented");
-        } elseif ($request->method == Response::PUT) {
+        } elseif (Flight::request()->method == 'PUT') {
             throw new Exception("put method not implemented");
-        } elseif ($request->method == Response::DELETE) {
+        } elseif (Flight::request()->method == 'DELETE') {
             throw new Exception("delete method not implemented");
         }
-        Flight::success($result);
+        
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 //client
 Flight::route('GET|POST|PUT|DELETE /client(/@id)', function($id){
+    
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+    $ip = Flight::request()->query['ip'];
+    $mac = Flight::request()->query['mac'];
+
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        $ip = $request->query['ip'];
-        $mac = $request->query['mac'];
-        if ($request->method == Response::GET) {
-            if ($id) { 
-                $result = Client::select($id); 
-            } elseif ($ip && $mac) { 
-                $result = Client::selectByIpMac($ip, $mac); 
-            } elseif ($ip) { 
-                $result = Client::selectByIp($ip); 
-            } elseif ($mac) { 
-                $result = Client::selectByMac($mac); 
-            } else { 
-                $result = Client::selectAll(); 
-            }
-        } elseif ($request->method == Response::POST) {
-            $result = Client::insert($data);
-        } elseif ($request->method == Response::PUT) {
-            $result = Client::update($id, $data);
-        } elseif ($request->method == Response::DELETE) {
-            $result = Client::delete($id);
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Client::select($id); } 
+            elseif ($ip && $mac) { $response->data = Client::selectByIpMac($ip, $mac); } 
+            elseif ($ip) { $response->data = Client::selectByIp($ip); } 
+            elseif ($mac) { $response->data = Client::selectByMac($mac); } 
+            else { $response->data = Client::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
+            $response->data = Client::insert($data);
+        } elseif (Flight::request()->method == 'PUT') {
+            $response->data = Client::update($id, $data);
+        } elseif (Flight::request()->method == 'DELETE') {
+            $response->data = Client::delete($id);
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 //transaction
 Flight::route('GET|POST|PUT|DELETE /transaction(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+    
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == Response::GET) {
-            if ($id) { $result = Transaction::select($id); }
-            else { $result = Transaction::selectAll(); }
-        } elseif ($request->method == Response::POST) {
-            $result = Transaction::insert($data);
-        } elseif ($request->method == Response::PUT) {
-            $result = Transaction::update($id, $data);
-        } elseif ($request->method == Response::DELETE) {
-            $result = Transaction::delete($id);
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Transaction::select($id); }
+            else { $response->data = Transaction::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
+            $response->data = Transaction::insert($data);
+        } elseif (Flight::request()->method == 'PUT') {
+            $response->data = Transaction::update($id, $data);
+        } elseif (Flight::request()->method == 'DELETE') {
+            $response->data = Transaction::delete($id);
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 //session
 Flight::route('GET|POST|PUT|DELETE /session(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+    $client = Flight::request()->query['client'];
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        $client = $request->query['client'];
-        if ($request->method == Response::GET) {
-            if ($id) { 
-                $result = Transaction::select($id); 
-            } elseif ($client) { 
-                $result = Transaction::selectByClient($client); 
-            } else { 
-                $result = Transaction::selectAll(); 
-            }
-        } elseif ($request->method == Response::POST) {
-            $result = Session::insert($data);
-        } elseif ($request->method == Response::PUT) {
-            $result = Session::update($id, $data);
-        } elseif ($request->method == Response::DELETE) {
-            $result = Session::delete($id);
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Transaction::select($id); } 
+            elseif ($client) { $response->data = Transaction::selectByClient($client); } 
+            else { $response->data = Transaction::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
+            $response->data = Session::insert($data);
+        } elseif (Flight::request()->method == 'PUT') {
+            $response->data = Session::update($id, $data);
+        } elseif (Flight::request()->method == 'DELETE') {
+            $response->data = Session::delete($id);
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 //user
 Flight::route('GET|POST|PUT|DELETE /user(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
+
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == Response::GET) {
-            if ($id) { $result = User::select($id); }
-            else { $result = User::selectAll(); }
-        } elseif ($request->method == Response::POST) {
-            $result = User::insert($data);
-        } elseif ($request->method == Response::PUT) {
-            $result = User::update($id, $data);
-        } elseif ($request->method == Response::DELETE) {
-            $result = User::delete($id);
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = User::select($id); }
+            else { $response->data = User::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
+            $response->data = User::insert($data);
+        } elseif (Flight::request()->method == 'PUT') {
+            $response->data = User::update($id, $data);
+        } elseif (Flight::request()->method == 'DELETE') {
+            $response->data = User::delete($id);
         }
-        Flight::success($result);
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 
 //preference
 Flight::route('GET|POST|PUT|DELETE /preference(/@id)', function($id){
+    $response = new Response();
+    $response->status = Response::SUCCESS;
+    $data = json_decode(Flight::request()->getBody());
     try {
-        $request = Flight::request();
-        $data = json_decode($request->getBody());
-        $result = null;
-        if ($request->method == Response::GET) {
-            if ($id) { $result = Preference::select($id); }
-            else { $result = Preference::selectAll(); }
-        } elseif ($request->method == Response::POST) {
-            $result = Preference::insert($data);
-        } elseif ($request->method == Response::PUT) {
-            $result = Preference::update($id, $data);
-        } elseif ($request->method == Response::DELETE) {
-            $result = Preference::delete($id);
+        if (Flight::request()->method == 'GET') {
+            if ($id) { $response->data = Preference::select($id); }
+            else { $response->data = Preference::selectAll(); }
+        } elseif (Flight::request()->method == 'POST') {
+            $response->data = Preference::insert($data);
+        } elseif (Flight::request()->method == 'PUT') {
+            $response->data = Preference::update($id, $data);
+        } elseif (Flight::request()->method == 'DELETE') {
+            $response->data = Preference::delete($id);
         }
-        Flight::success($result);
+        
     } catch (Exception $exception){
-        $response = new Response();
-        $response->method = $request->method;
-        $response->fault = Fault::parse($exception);
-        Flight::error($response);
+        $response->fault = Fault::parse($exception);    	
+        $response->status = Response::ERROR;
     }
+
+    Flight::success($response);
 });
 Flight::start();
 ?>

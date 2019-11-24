@@ -7,17 +7,16 @@ app.controller('sessionController', function (
 
 
     $scope.init = function() {
-        $interval(function() {
-            variableFactory.client.$promise.then(function(){
-                $scope.session = Session.getByClient(
-                    {client : variableFactory.client.id },
-                    function(result){
-                        //console.log(result);        
-                    }, 
-                    function(result) {
-                        
-                        //console.log(result);
-                    });
+        $interval(function(){ 
+            variableFactory.client.$promise.then(function(result) {
+                    Session.getByClient({client :  variableFactory.client.data.id}, 
+                        function(result){
+                            if (result.status == 'SUCCESS') {
+                                $scope.session = result.data;
+                            } else {
+                                console.log(result.fault.message);                             
+                            }
+                        });
             });
         }, 1000);
     };

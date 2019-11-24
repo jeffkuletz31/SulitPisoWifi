@@ -7,7 +7,7 @@ app.controller('transactionController', function (
 
 
     $scope.init = function() {
-        // Transaction.getByClient({client : variableFactory.client.id }, function(result){
+        // Transaction.getByClient({client : variableFactory.client.id }, function(result) {
         //     $scope.transaction = result;
         //     $scope.result = "alert alert-success";
         //     $scope.message = "Transaction exist.";
@@ -17,7 +17,9 @@ app.controller('transactionController', function (
         //     $scope.message = "Transaction doesnt exist.";
         // });
 
-        $scope.transactions = Transaction.query();
+        Transaction.getAll(function(result) {
+            $scope.transactions = result.data;
+        });
     };
     
     $scope.init();

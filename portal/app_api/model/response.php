@@ -1,14 +1,13 @@
 <?php
 class Response {
-    public $method = null;			//GET, POST, PUT, DELETE, OPTION
+	public $status = null;			//SUCCESS, ERROR, PROHIBITED
+	public $data = null;       
+
     public $fault = null;       
 
-	//method
-	const GET = 'GET';
-	const POST = 'POST';
-	const PUT = 'PUT';
-	const DELETE = 'DELETE';
-
+	const SUCCESS = 'SUCCESS';
+	const ERROR = 'ERROR';
+	const PROHIBITED = 'PROHIBITED';
 	
 	public function __construct(){
 

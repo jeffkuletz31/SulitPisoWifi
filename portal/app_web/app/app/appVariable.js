@@ -17,13 +17,19 @@ app.factory('variableFactory', function (
     variableFactory.load = function (type) {
         switch (type) {
             case 'server':
-                variableFactory.server = Server.get({id : 1});
+                Server.getAll(function(result) {
+                    variableFactory.server = result;
+                });
                 break;
             case 'remote':
-                variableFactory.remote = Remote.get({id : 1});
+                Remote.getAll(function(result) {
+                    variableFactory.remote = result;
+                });
                 break;
             case 'status':
-                variableFactory.status = Status.query();
+                Status.getAll(function(result) {
+                    variableFactory.status = result;
+                })
                 break;
         }
     };
@@ -32,9 +38,9 @@ app.factory('variableFactory', function (
 
         var promises = $q.all(
             [
-                Server.get({id : 1}),
-                Remote.get({id : 1}),
-                Status.query()
+                Server.getAll(),
+                Remote.getAll(),
+                Status.getAll()
             ]
         );
 

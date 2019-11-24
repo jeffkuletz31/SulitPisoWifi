@@ -2,10 +2,10 @@ var app = angular.module('app');
 
 app.controller('remoteController', function ($scope, $interval, variableFactory) {
 
-    $scope.remote = variableFactory.remote;
-
     $scope.init = function() {
-        $scope.remote = variableFactory.remote;
+        variableFactory.remote.$promise.then(function() {
+            $scope.remote = variableFactory.remote.data[0]; 
+        });
     };
 
     $scope.init();
